@@ -7,7 +7,6 @@ import Jobs from "./components/jobs";
 import Blog from "./components/blog";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Testimonials from "./components/Testimonials";
 
 class App extends Component {
   render() {
@@ -20,7 +19,6 @@ class App extends Component {
           <Route path="/faq" component={Faq} />
           <Route path="/blog" component={Blog} />
         </Switch>
-        <Testimonials />
         <Footer />
       </React.Fragment>
     );
