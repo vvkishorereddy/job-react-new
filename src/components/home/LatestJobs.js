@@ -6,7 +6,7 @@ const data = [
     id: 1,
     title: "Carpenters And Electricians Installers",
     category: "Construction",
-    tag: "Paradigm",
+    companyName: "Paradigm",
     jobType: "Full-Time",
     bgColor: "#5cb85c",
     companyLogo:
@@ -20,7 +20,7 @@ const data = [
     id: 2,
     title: "Retail Store Driver",
     category: "Transportation",
-    tag: "Nindzja",
+    companyName: "Nindzja",
     jobType: "Remote",
     bgColor: "#8435cc",
     companyLogo:
@@ -34,7 +34,7 @@ const data = [
     id: 3,
     title: "Marketing Coordinator",
     category: "Training",
-    tag: "Trumpet",
+    companyName: "Trumpet",
     jobType: "Part-Time",
     bgColor: "#f0ad4e",
     companyLogo:
@@ -48,7 +48,7 @@ const data = [
     id: 4,
     title: "Senior Health And Nutrition Advisor",
     category: "Technology",
-    tag: "Ansar",
+    companyName: "Ansar",
     jobType: "Intership",
     bgColor: "#d9534f",
     companyLogo:
@@ -92,7 +92,7 @@ export default class LatestJobs extends Component {
                           <img src={post.companyLogo} />
                           <div
                             className="job-time"
-                            style={{ backgroundColor: "#d9534f" }}
+                            style={{ backgroundColor: post.bgColor }}
                           >
                             {post.jobType}
                           </div>
@@ -104,7 +104,7 @@ export default class LatestJobs extends Component {
                           </div>
                           <div className="w-clearfix">
                             <div className="meta-tag">
-                              <div>{post.tag}</div>
+                              <div>{post.companyName}</div>
                             </div>
                             <div className="marker meta-tag">
                               <div>{post.location}</div>

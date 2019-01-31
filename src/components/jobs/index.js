@@ -1,7 +1,88 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+
 import Banner from "./Banner";
 
+const data = [
+  {
+    id: 1,
+    title: "Carpenters And Electricians Installers",
+    category: "Construction",
+    companyName: "Paradigm",
+    jobType: "Full-Time",
+    bgColor: "#5cb85c",
+    companyLogo:
+      "https://daks2k3a4ib2z.cloudfront.net/57a4a82bae4229de1de385d1/57a88889f66b1be80d2d9ed1_client-6.jpg",
+    location: "Shanghai, China",
+    salary: "$40,000 - $200,000 / year",
+    description:
+      "Quisque ut nisi. Donec sodales sagittis magna. Fusce convallis metus id felis luctus adipiscing. In turpis. Praesent porttitor, nulla vitae posuere iaculis, arcu nisl dignissim dolor, a pretium mi sem ut ipsum...."
+  },
+  {
+    id: 2,
+    title: "Retail Store Driver",
+    category: "Transportation",
+    companyName: "Nindzja",
+    jobType: "Remote",
+    bgColor: "#8435cc",
+    companyLogo:
+      "https://daks2k3a4ib2z.cloudfront.net/57a4a82bae4229de1de385d1/57a88664c3e841c509ee48e7_client-5.jpg",
+    location: "Bankok, Thailand",
+    salary: "$40,000 - $200,000 / year",
+    description:
+      "Quisque ut nisi. Donec sodales sagittis magna. Fusce convallis metus id felis luctus adipiscing. In turpis. Praesent porttitor, nulla vitae posuere iaculis, arcu nisl dignissim dolor, a pretium mi sem ut ipsum...."
+  },
+  {
+    id: 3,
+    title: "Marketing Coordinator",
+    category: "Training",
+    companyName: "Trumpet",
+    jobType: "Part-Time",
+    bgColor: "#f0ad4e",
+    companyLogo:
+      "https://daks2k3a4ib2z.cloudfront.net/57a4a82bae4229de1de385d1/57a88554c3e841c509ee47c2_client-4.jpg",
+    location: "Istanbul, Turkey",
+    salary: "$40,000 - $200,000 / year",
+    description:
+      "Quisque ut nisi. Donec sodales sagittis magna. Fusce convallis metus id felis luctus adipiscing. In turpis. Praesent porttitor, nulla vitae posuere iaculis, arcu nisl dignissim dolor, a pretium mi sem ut ipsum...."
+  },
+  {
+    id: 4,
+    title: "Senior Health And Nutrition Advisor",
+    category: "Technology",
+    companyName: "Ansar",
+    jobType: "Intership",
+    bgColor: "#d9534f",
+    companyLogo:
+      "https://daks2k3a4ib2z.cloudfront.net/57a4a82bae4229de1de385d1/57a5f1bcc1305fe20945ea37_client-3.jpg",
+    location: "Roma, Italy",
+    salary: "$40,000 - $200,000 / year",
+    description:
+      "Quisque ut nisi. Donec sodales sagittis magna. Fusce convallis metus id felis luctus adipiscing. In turpis. Praesent porttitor, nulla vitae posuere iaculis, arcu nisl dignissim dolor, a pretium mi sem ut ipsum...."
+  },
+  {
+    id: 5,
+    title: "Clinical Psychologist",
+    category: "Accounting",
+    companyName: "Talkbout",
+    jobType: "Freelance",
+    bgColor: "rgb(91, 192, 222)",
+    companyLogo:
+      "https://daks2k3a4ib2z.cloudfront.net/57a4a82bae4229de1de385d1/57a5eab7c1305fe20945dea3_client-1.jpg",
+    location: "Brooklyn, New York ",
+    salary: "$40,000 - $200,000 / year",
+    description:
+      "Quisque ut nisi. Donec sodales sagittis magna. Fusce convallis metus id felis luctus adipiscing. In turpis. Praesent porttitor, nulla vitae posuere iaculis, arcu nisl dignissim dolor, a pretium mi sem ut ipsum...."
+  }
+];
+
 export default class Jobs extends Component {
+  state = {
+    data: []
+  };
+  componentDidMount() {
+    this.setState({ data: data });
+  }
   render() {
     return (
       <React.Fragment>
@@ -135,244 +216,49 @@ export default class Jobs extends Component {
               </div>
               <div className="space" />
             </div>
+
             <div>
               <div>
                 <div className="w-row">
                   <div className="w-col w-col-9 w-col-stack">
                     <div className="w-dyn-list">
                       <div className="w-dyn-items">
-                        <div className="w-dyn-item">
-                          <a
-                            className="jobs-wrapper no-line w-clearfix w-inline-block"
-                            href="/jobs/paradigm"
-                          >
-                            <div className="jobs-client">
-                              <img src="https://daks2k3a4ib2z.cloudfront.net/57a4a82bae4229de1de385d1/57a88889f66b1be80d2d9ed1_client-6.jpg" />
-                              <div
-                                className="job-time"
-                                style={{ backgroundColor: "#5cb85c" }}
+                        {this.state.data.map(post => {
+                          return (
+                            <div className="w-dyn-item">
+                              <Link
+                                to="/jobs/paradigm"
+                                className="jobs-wrapper no-line w-clearfix w-inline-block"
                               >
-                                Full-Time
-                              </div>
-                            </div>
-                            <div className="jobs-content">
-                              <h4 className="job-title">
-                                Carpenters And Electricians Installers
-                              </h4>
-                              <div className="sub-category-text">
-                                Construction
-                              </div>
-                              <div className="w-clearfix">
-                                <div className="meta-tag">
-                                  <div>Paradigm</div>
+                                <div className="jobs-client">
+                                  <img src={post.companyLogo} />
+                                  <div
+                                    className="job-time"
+                                    style={{ backgroundColor: post.bgColor }}
+                                  >
+                                    {post.jobType}
+                                  </div>
                                 </div>
-                                <div className="marker meta-tag">
-                                  <div>Shanghai, China</div>
+                                <div className="jobs-content">
+                                  <h4 className="job-title">{post.title}</h4>
+                                  <div className="sub-category-text">
+                                    {post.category}
+                                  </div>
+                                  <div className="w-clearfix">
+                                    <div className="meta-tag">
+                                      <div>{post.companyName}</div>
+                                    </div>
+                                    <div className="marker meta-tag">
+                                      <div>{post.location}</div>
+                                    </div>
+                                  </div>
+                                  <div className="small space" />
+                                  <p>{post.description}</p>
                                 </div>
-                              </div>
-                              <div className="small space" />
-                              <p>
-                                Quisque ut nisi. Donec sodales sagittis magna.
-                                Fusce convallis metus id felis luctus
-                                adipiscing. In turpis. Praesent porttitor, nulla
-                                vitae posuere iaculis, arcu nisl dignissim
-                                dolor, a pretium mi sem ut ipsum....
-                              </p>
+                              </Link>
                             </div>
-                          </a>
-                        </div>
-                        <div className="w-dyn-item">
-                          <a
-                            className="jobs-wrapper no-line w-clearfix w-inline-block"
-                            href="/jobs/nindzja"
-                          >
-                            <div className="jobs-client">
-                              <img src="https://daks2k3a4ib2z.cloudfront.net/57a4a82bae4229de1de385d1/57a88664c3e841c509ee48e7_client-5.jpg" />
-                              <div
-                                className="job-time"
-                                style={{ backgroundColor: "#8435cc" }}
-                              >
-                                Remote
-                              </div>
-                            </div>
-                            <div className="jobs-content">
-                              <h4 className="job-title">Retail Store Driver</h4>
-                              <div className="sub-category-text">
-                                Transportation
-                              </div>
-                              <div className="w-clearfix">
-                                <div className="meta-tag">
-                                  <div>Nindzja</div>
-                                </div>
-                                <div className="marker meta-tag">
-                                  <div>Bankok, Thailand</div>
-                                </div>
-                              </div>
-                              <div className="small space" />
-                              <p>
-                                Quisque ut nisi. Donec sodales sagittis magna.
-                                Fusce convallis metus id felis luctus
-                                adipiscing. In turpis. Praesent porttitor, nulla
-                                vitae posuere iaculis, arcu nisl dignissim
-                                dolor, a pretium mi sem ut ipsum....
-                              </p>
-                            </div>
-                          </a>
-                        </div>
-                        <div className="w-dyn-item">
-                          <a
-                            className="jobs-wrapper no-line w-clearfix w-inline-block"
-                            href="/jobs/marketing-coordinator"
-                          >
-                            <div className="jobs-client">
-                              <img src="https://daks2k3a4ib2z.cloudfront.net/57a4a82bae4229de1de385d1/57a88554c3e841c509ee47c2_client-4.jpg" />
-                              <div
-                                className="job-time"
-                                style={{ backgroundColor: "#f0ad4e" }}
-                              >
-                                Part-Time
-                              </div>
-                            </div>
-                            <div className="jobs-content">
-                              <h4 className="job-title">
-                                Marketing Coordinator
-                              </h4>
-                              <div className="sub-category-text">Training</div>
-                              <div className="w-clearfix">
-                                <div className="meta-tag">
-                                  <div>Trumpet</div>
-                                </div>
-                                <div className="marker meta-tag">
-                                  <div>Istanbul, Turkey</div>
-                                </div>
-                              </div>
-                              <div className="small space" />
-                              <p>
-                                Quisque ut nisi. Donec sodales sagittis magna.
-                                Fusce convallis metus id felis luctus
-                                adipiscing. In turpis. Praesent porttitor, nulla
-                                vitae posuere iaculis, arcu nisl dignissim
-                                dolor, a pretium mi sem ut ipsum....
-                              </p>
-                            </div>
-                          </a>
-                        </div>
-                        <div className="w-dyn-item">
-                          <a
-                            className="jobs-wrapper no-line w-clearfix w-inline-block"
-                            href="/jobs/ansar"
-                          >
-                            <div className="jobs-client">
-                              <img src="https://daks2k3a4ib2z.cloudfront.net/57a4a82bae4229de1de385d1/57a5f1bcc1305fe20945ea37_client-3.jpg" />
-                              <div
-                                className="job-time"
-                                style={{ backgroundColor: "#d9534f" }}
-                              >
-                                Intership
-                              </div>
-                            </div>
-                            <div className="jobs-content">
-                              <h4 className="job-title">
-                                Senior Health And Nutrition Advisor
-                              </h4>
-                              <div className="sub-category-text">
-                                Technology
-                              </div>
-                              <div className="w-clearfix">
-                                <div className="meta-tag">
-                                  <div>Ansar</div>
-                                </div>
-                                <div className="marker meta-tag">
-                                  <div>Roma, Italy</div>
-                                </div>
-                              </div>
-                              <div className="small space" />
-                              <p>
-                                Quisque ut nisi. Donec sodales sagittis magna.
-                                Fusce convallis metus id felis luctus
-                                adipiscing. In turpis. Praesent porttitor, nulla
-                                vitae posuere iaculis, arcu nisl dignissim
-                                dolor, a pretium mi sem ut ipsum....
-                              </p>
-                            </div>
-                          </a>
-                        </div>
-                        <div className="w-dyn-item">
-                          <a
-                            className="jobs-wrapper no-line w-clearfix w-inline-block"
-                            href="/jobs/tivimus"
-                          >
-                            <div className="jobs-client">
-                              <img src="https://daks2k3a4ib2z.cloudfront.net/57a4a82bae4229de1de385d1/57a5f058a34e30ad0d5a0dd9_client-2.jpg" />
-                              <div
-                                className="job-time"
-                                style={{ backgroundColor: "#5cb85c" }}
-                              >
-                                Full-Time
-                              </div>
-                            </div>
-                            <div className="jobs-content">
-                              <h4 className="job-title">Template Reviewer</h4>
-                              <div className="sub-category-text">Media</div>
-                              <div className="w-clearfix">
-                                <div className="meta-tag">
-                                  <div>Trivimus</div>
-                                </div>
-                                <div className="marker meta-tag">
-                                  <div>San Diego, California</div>
-                                </div>
-                              </div>
-                              <div className="small space" />
-                              <p>
-                                Quisque ut nisi. Donec sodales sagittis magna.
-                                Fusce convallis metus id felis luctus
-                                adipiscing. In turpis. Praesent porttitor, nulla
-                                vitae posuere iaculis, arcu nisl dignissim
-                                dolor, a pretium mi sem ut ipsum....
-                              </p>
-                            </div>
-                          </a>
-                        </div>
-                        <div className="w-dyn-item">
-                          <a
-                            className="jobs-wrapper no-line w-clearfix w-inline-block"
-                            href="/jobs/talkbout"
-                          >
-                            <div className="jobs-client">
-                              <img src="https://daks2k3a4ib2z.cloudfront.net/57a4a82bae4229de1de385d1/57a5eab7c1305fe20945dea3_client-1.jpg" />
-                              <div
-                                className="job-time"
-                                style={{ backgroundColor: "#5bc0de" }}
-                              >
-                                Freelance
-                              </div>
-                            </div>
-                            <div className="jobs-content">
-                              <h4 className="job-title">
-                                Clinical Psychologist
-                              </h4>
-                              <div className="sub-category-text">
-                                Accounting
-                              </div>
-                              <div className="w-clearfix">
-                                <div className="meta-tag">
-                                  <div>Talkbout</div>
-                                </div>
-                                <div className="marker meta-tag">
-                                  <div>Brooklyn, New York </div>
-                                </div>
-                              </div>
-                              <div className="small space" />
-                              <p>
-                                Quisque ut nisi. Donec sodales sagittis magna.
-                                Fusce convallis metus id felis luctus
-                                adipiscing. In turpis. Praesent porttitor, nulla
-                                vitae posuere iaculis, arcu nisl dignissim
-                                dolor, a pretium mi sem ut ipsum....
-                              </p>
-                            </div>
-                          </a>
-                        </div>
+                          );
+                        })}
                       </div>
                     </div>
                   </div>
