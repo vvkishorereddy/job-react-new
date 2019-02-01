@@ -1,24 +1,15 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-import blogData from "../../data/blogData.json";
+import withContext from "../../Context/ContextHOC";
 
-export default class blogDetails extends Component {
-  state = {
-    data: {}
-  };
-
+class blogDetails extends Component {
   componentDidMount() {
-    const result = blogData.filter(
-      data => data.id === parseInt(this.props.match.params.id)
-    );
-    this.setState({
-      data: result[0]
-    });
+    this.props.context.getSingleBlogData(this.props.match.params.id);
   }
 
   render() {
-    const { content, title, image, date } = this.state.data;
+    const { content, title, image, date } = this.props.context.singleBlogData;
     return (
       <React.Fragment>
         <div
@@ -54,3 +45,5 @@ export default class blogDetails extends Component {
     );
   }
 }
+
+export default withContext(blogDetails);

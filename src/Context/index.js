@@ -10,7 +10,8 @@ class AppProvider extends Component {
     posts: [],
     jobs: [],
     categories: [],
-    singleJob: {}
+    singleJob: {},
+    singleBlogData: {}
   };
 
   setfaqData = () => {
@@ -72,6 +73,21 @@ class AppProvider extends Component {
       });
   };
 
+  getSingleBlogData = id => {
+    fetch("/data/blogData.json")
+      .then(response => response.json())
+      .then(data => {
+        const filteredData = data.filter(post => {
+          return post.id === parseInt(id);
+        });
+        const singleResult = filteredData[0];
+        this.setState({
+          ...this.state,
+          singleBlogData: singleResult
+        });
+      });
+  };
+
   render() {
     return (
       <AppContext.Provider
@@ -81,7 +97,8 @@ class AppProvider extends Component {
           setBlogData: this.setBlogData,
           setJobsData: this.setJobsData,
           getJobData: this.getJobData,
-          setCategoryData: this.setCategoryData
+          setCategoryData: this.setCategoryData,
+          getSingleBlogData: this.getSingleBlogData
         }}
       >
         {this.props.children}
