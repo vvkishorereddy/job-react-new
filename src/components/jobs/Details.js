@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-import { Consumer } from "../../Context.js";
+import { AppConsumer } from "../../Context.js";
 
 export default class jobDetails extends Component {
   filterData = (arr, id) => {
@@ -13,7 +13,7 @@ export default class jobDetails extends Component {
 
   render() {
     return (
-      <Consumer>
+      <AppConsumer>
         {({ jobs }) => {
           const filteredData = this.filterData(
             jobs,
@@ -189,7 +189,7 @@ export default class jobDetails extends Component {
             </div>
           );
         }}
-      </Consumer>
+      </AppConsumer>
     );
   }
 }

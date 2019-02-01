@@ -1,13 +1,17 @@
 import React, { Component } from "react";
 import Banner from "./Banner";
-import { Consumer } from "../../Context";
+import { AppContext, AppConsumer } from "../../Context";
 
 export default class Faq extends Component {
+  componentDidMount() {
+    this.context.setfaqData();
+  }
+
   render() {
     return (
       <React.Fragment>
         <Banner />
-        <Consumer>
+        <AppConsumer>
           {({ faq }) => {
             return (
               <div className="light-gray section">
@@ -36,8 +40,10 @@ export default class Faq extends Component {
               </div>
             );
           }}
-        </Consumer>
+        </AppConsumer>
       </React.Fragment>
     );
   }
 }
+
+Faq.contextType = AppContext;

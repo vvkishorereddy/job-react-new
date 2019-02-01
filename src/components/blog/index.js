@@ -1,14 +1,18 @@
 import React, { Component } from "react";
 import Banner from "./Banner";
 import Row from "./Row";
-import { Consumer } from "../../Context";
+import { AppContext, AppConsumer } from "../../Context";
 
 export default class Blog extends Component {
+  componentDidMount() {
+    this.context.setBlogData();
+  }
+
   render() {
     return (
       <React.Fragment>
         <Banner />
-        <Consumer>
+        <AppConsumer>
           {({ posts }) => {
             return (
               <div className="section">
@@ -24,8 +28,10 @@ export default class Blog extends Component {
               </div>
             );
           }}
-        </Consumer>
+        </AppConsumer>
       </React.Fragment>
     );
   }
 }
+
+Blog.contextType = AppContext;

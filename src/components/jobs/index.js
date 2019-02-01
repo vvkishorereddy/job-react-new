@@ -4,9 +4,13 @@ import Banner from "./Banner";
 import Row from "./Row";
 import JobType from "./JobType";
 import Category from "./Category";
-import { Consumer } from "../../Context";
+import { AppContext, AppConsumer } from "../../Context";
 
 export default class Jobs extends Component {
+  componentDidMount() {
+    this.context.setJobsData();
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -17,13 +21,13 @@ export default class Jobs extends Component {
               <div className="w-col w-col-9 w-col-stack">
                 <div className="w-dyn-list">
                   <div className="w-dyn-items">
-                    <Consumer>
+                    <AppConsumer>
                       {({ jobs }) => {
                         return jobs.map(post => {
                           return <Row key={post.id} post={post} />;
                         });
                       }}
-                    </Consumer>
+                    </AppConsumer>
                   </div>
                 </div>
               </div>
@@ -41,3 +45,5 @@ export default class Jobs extends Component {
     );
   }
 }
+
+Jobs.contextType = AppContext;
