@@ -9,6 +9,7 @@ export default class Banner extends Component {
             <h1 className="banner-title">Make your dream true with Jobify.</h1>
             <h3>Build your future with us.</h3>
             <div className="space" />
+
             <div>
               <div className="w-form">
                 <form

@@ -22,6 +22,7 @@ class App extends Component {
           <Route path="/blog" exact component={Blog} />
           <Route path="/blog/:id" component={blogDetails} />
           <Route path="/jobs/:id" component={jobDetails} />
+          <Route path="/categories/:category" component={Jobs} />
         </Switch>
         <Footer />
       </React.Fragment>

@@ -13,15 +13,20 @@ export default class Footer extends Component {
           <div className="w-container">
             <div className="align-center">
               <Link to="/" className="w-inline-block">
-                <img sizes="173px" src="/assets/img/logo.png" width={173} />
+                <img
+                  sizes="173px"
+                  src="/assets/img/logo.png"
+                  width={173}
+                  alt="logo"
+                />
               </Link>
               <div className="space" />
               <div>
-                <a className="social-icon w-inline-block" href="#" />
-                <a className="social-icon twitter w-inline-block" href="#" />
-                <a className="pin social-icon w-inline-block" href="#" />
-                <a className="rss social-icon w-inline-block" href="#" />
-                <a className="linkin social-icon w-inline-block" href="#" />
+                <button className="social-icon w-inline-block" />
+                <button className="social-icon twitter w-inline-block" />
+                <button className="pin social-icon w-inline-block" />
+                <button className="rss social-icon w-inline-block" />
+                <button className="linkin social-icon w-inline-block" />
               </div>
               <div className="space" />
               <p className="copyright">&copy; {currentYear} Careers Era</p>
@@ -48,21 +53,21 @@ export default class Footer extends Component {
                 <div className="small space" />
                 <p>
                   Apply using webmail:&nbsp;
-                  <a className="apply-link" href="#">
+                  <button className="apply-link" href="#">
                     Gmail
-                  </a>
+                  </button>
                   &nbsp;/&nbsp;
-                  <a className="apply-link" href="#">
+                  <button className="apply-link" href="#">
                     AOL
-                  </a>
+                  </button>
                   &nbsp;/&nbsp;
-                  <a className="apply-link" href="#">
+                  <button className="apply-link" href="#">
                     Yahoo
-                  </a>
+                  </button>
                   &nbsp;/&nbsp;
-                  <a className="apply-link" href="#">
+                  <button className="apply-link" href="#">
                     Outlook
-                  </a>
+                  </button>
                 </p>
               </div>
             </div>

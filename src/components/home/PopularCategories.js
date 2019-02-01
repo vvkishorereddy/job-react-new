@@ -1,57 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import withContext from "../../Context/ContextHOC";
 
-const data = [
-  {
-    id: 1,
-    title: "Media",
-    image:
-      "https://daks2k3a4ib2z.cloudfront.net/57a4a82bae4229de1de385d1/57a4acb3e4dd66dc54af54d7_icon-4.png"
-  },
-  {
-    id: 2,
-    title: "Training",
-    image:
-      "https://daks2k3a4ib2z.cloudfront.net/57a4a82bae4229de1de385d1/57a4ad11e67057bb1c67747d_icon-5.png"
-  },
-  {
-    id: 3,
-    title: "Transportation",
-    image:
-      "https://daks2k3a4ib2z.cloudfront.net/57a4a82bae4229de1de385d1/57a4ad78e67057bb1c6774b1_icon-6.png"
-  },
-  {
-    id: 4,
-    title: "Construction",
-    image:
-      "https://daks2k3a4ib2z.cloudfront.net/57a4a82bae4229de1de385d1/57a4abc1d0f82cd81c5a4e1f_icon-3.png"
-  },
-  {
-    id: 5,
-    title: "Accounting",
-    image:
-      "https://daks2k3a4ib2z.cloudfront.net/57a4a82bae4229de1de385d1/57a4ab4a38927c9f54afa6b5_icon-2.png"
-  },
-  {
-    id: 6,
-    title: "Technology",
-    image:
-      "https://daks2k3a4ib2z.cloudfront.net/57a4a82bae4229de1de385d1/57a4a9b8d0f82cd81c5a4ca9_icon-1.png"
-  }
-];
-
-export default class PopularCategories extends Component {
-  state = {
-    data: []
-  };
-
+class PopularCategories extends Component {
   componentDidMount() {
-    this.setState({
-      data: data
-    });
+    this.props.context.setCategoryData();
   }
 
   render() {
+    const { categories } = this.props.context;
     return (
       <div className="section">
         <div className="w-container">
@@ -61,15 +18,15 @@ export default class PopularCategories extends Component {
           <div>
             <div className="w-dyn-list">
               <div className="w-dyn-items w-row">
-                {this.state.data.map(post => {
+                {categories.map(post => {
                   return (
                     <React.Fragment key={post.id}>
                       <div className="w-col w-col-4 w-dyn-item">
                         <Link
-                          to={`/jobs/${post.id}`}
+                          to={`/categories/${post.title}`}
                           className="categories-wrapper w-inline-block"
                         >
-                          <img width={60} src={post.image} />
+                          <img width={60} src={post.image} alt={post.title} />
                           <div className="categoris-name">{post.title}</div>
                         </Link>
                       </div>
@@ -89,3 +46,5 @@ export default class PopularCategories extends Component {
     );
   }
 }
+
+export default withContext(PopularCategories);

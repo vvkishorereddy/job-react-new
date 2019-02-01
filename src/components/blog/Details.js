@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Banner from "./Banner";
 
 import blogData from "../../data/blogData.json";
 
@@ -19,7 +18,7 @@ export default class blogDetails extends Component {
   }
 
   render() {
-    const { id, content, title, image, date } = this.state.data;
+    const { content, title, image, date } = this.state.data;
     return (
       <React.Fragment>
         <div

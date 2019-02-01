@@ -2,11 +2,15 @@ import React, { Component } from "react";
 
 const AppContext = React.createContext();
 
+const AppConsumer = AppContext.Consumer;
+
 class AppProvider extends Component {
   state = {
     faq: [],
     posts: [],
-    jobs: []
+    jobs: [],
+    categories: [],
+    singleJob: {}
   };
 
   setfaqData = () => {
@@ -42,6 +46,32 @@ class AppProvider extends Component {
       });
   };
 
+  getJobData = id => {
+    fetch("/data/jobsData.json")
+      .then(response => response.json())
+      .then(data => {
+        const filteredData = data.filter(post => {
+          return post.id === parseInt(id);
+        });
+        const singleResult = filteredData[0];
+        this.setState({
+          ...this.state,
+          singleJob: singleResult
+        });
+      });
+  };
+
+  setCategoryData = () => {
+    fetch("/data/category.json")
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          ...this.state,
+          categories: data
+        });
+      });
+  };
+
   render() {
     return (
       <AppContext.Provider
@@ -49,7 +79,9 @@ class AppProvider extends Component {
           ...this.state,
           setfaqData: this.setfaqData,
           setBlogData: this.setBlogData,
-          setJobsData: this.setJobsData
+          setJobsData: this.setJobsData,
+          getJobData: this.getJobData,
+          setCategoryData: this.setCategoryData
         }}
       >
         {this.props.children}
@@ -57,7 +89,5 @@ class AppProvider extends Component {
     );
   }
 }
-
-const AppConsumer = AppContext.Consumer;
 
 export { AppContext, AppProvider, AppConsumer };
