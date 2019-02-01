@@ -13,7 +13,7 @@ export default class Header extends Component {
           data-duration={400}
         >
           <NavLink className="brand-logo w-nav-brand" to="/">
-            <img sizes="124px" src="assets/img/logo.png" width={124} />
+            <img sizes="124px" src="/assets/img/logo.png" width={124} />
           </NavLink>
 
           <div className="social-wrapper w-hidden-medium w-hidden-small w-hidden-tiny">

@@ -7,6 +7,8 @@ import Jobs from "./components/jobs";
 import Blog from "./components/blog";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import blogDetails from "./components/blog/Details";
+import jobDetails from "./components/jobs/Details";
 
 class App extends Component {
   render() {
@@ -15,9 +17,11 @@ class App extends Component {
         <Header />
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/jobs" component={Jobs} />
+          <Route path="/jobs" exact component={Jobs} />
           <Route path="/faq" component={Faq} />
-          <Route path="/blog" component={Blog} />
+          <Route path="/blog" exact component={Blog} />
+          <Route path="/blog/:id" component={blogDetails} />
+          <Route path="/jobs/:id" component={jobDetails} />
         </Switch>
         <Footer />
       </React.Fragment>
