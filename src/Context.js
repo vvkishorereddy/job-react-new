@@ -1,9 +1,5 @@
 import React, { Component } from "react";
 
-import faqData from "./data/faqdata.json";
-import blogData from "./data/blogData.json";
-import jobsData from "./data/jobsData.json";
-
 const AppContext = React.createContext();
 
 class AppProvider extends Component {
@@ -14,24 +10,36 @@ class AppProvider extends Component {
   };
 
   setfaqData = () => {
-    this.setState({
-      ...this.state,
-      faq: faqData
-    });
+    fetch("/data/faqdata.json")
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          ...this.state,
+          faq: data
+        });
+      });
   };
 
   setBlogData = () => {
-    this.setState({
-      ...this.state,
-      posts: blogData
-    });
+    fetch("/data/blogData.json")
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          ...this.state,
+          posts: data
+        });
+      });
   };
 
   setJobsData = () => {
-    this.setState({
-      ...this.state,
-      jobs: jobsData
-    });
+    fetch("/data/jobsData.json")
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          ...this.state,
+          jobs: data
+        });
+      });
   };
 
   render() {
