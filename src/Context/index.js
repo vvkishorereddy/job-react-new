@@ -21,8 +21,8 @@ class AppProvider extends Component {
     const url = this.domainUrl + "/subscribers";
     e.preventDefault();
     Model.post(url, { email: email }, response => {
-      console.log(response);
-    });
+      return response.json();
+    }).then(result => console.log(result));
   };
 
   getAllFaqs = () => {
