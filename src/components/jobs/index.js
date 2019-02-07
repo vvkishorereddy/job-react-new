@@ -7,8 +7,24 @@ import Category from "./Category";
 import { AppContext, AppConsumer } from "../../Context";
 
 export default class Jobs extends Component {
+  state = {
+    scrolling: false
+  };
+
   componentDidMount() {
-    this.context.getAllJobs();
+    window.addEventListener("scroll", () => {
+      this.setState({
+        scrolling: true
+      });
+
+      if (
+        Math.ceil(window.innerHeight + window.scrollY) >=
+        document.body.offsetHeight - 300
+      ) {
+        console.warn("bottom reached");
+      }
+    });
+    this.context.getAllJobs(10);
   }
 
   render() {
