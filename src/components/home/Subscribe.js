@@ -11,9 +11,12 @@ class Subscribe extends Component {
             onSubmit={e => {
               SubscribeForm(e, this.email.value);
               this.email.value = "";
+              document.getElementById("successMessage").style.display = "block";
+              document.getElementById("subscribeForm").style.display = "none";
             }}
             className="subscribe-wrapper w-clearfix"
             name="email-form"
+            id="subscribeForm"
           >
             <input
               className="subscribe-field w-input"
@@ -29,7 +32,7 @@ class Subscribe extends Component {
               defaultValue="Subscribe Now"
             />
           </form>
-          <div className="success-message w-form-done">
+          <div className="success-message w-form-done" id="successMessage">
             <div>Thank you! Your submission has been received!</div>
           </div>
           <div className="error-message w-form-fail">
