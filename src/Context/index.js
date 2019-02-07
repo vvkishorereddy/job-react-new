@@ -88,6 +88,11 @@ class AppProvider extends Component {
       });
   };
 
+  SubscribeForm = (e, email) => {
+    e.preventDefault();
+    console.log(email);
+  };
+
   render() {
     return (
       <AppContext.Provider
@@ -98,7 +103,8 @@ class AppProvider extends Component {
           setJobsData: this.setJobsData,
           getJobData: this.getJobData,
           setCategoryData: this.setCategoryData,
-          getSingleBlogData: this.getSingleBlogData
+          getSingleBlogData: this.getSingleBlogData,
+          SubscribeForm: this.SubscribeForm
         }}
       >
         {this.props.children}
