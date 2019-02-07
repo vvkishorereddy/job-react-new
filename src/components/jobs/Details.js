@@ -5,7 +5,7 @@ import withContext from "../../Context/ContextHOC";
 
 class jobDetails extends Component {
   componentDidMount() {
-    this.props.context.getJobData(this.props.match.params.id);
+    this.props.context.getSingleJob(this.props.match.params.id);
   }
 
   render() {

@@ -25,7 +25,7 @@ class AppProvider extends Component {
     });
   };
 
-  setfaqData = () => {
+  getAllFaqs = () => {
     const url = this.domainUrl + "/faqs";
     Model.get(url, data => {
       this.setState({
@@ -35,8 +35,11 @@ class AppProvider extends Component {
     });
   };
 
-  setBlogData = () => {
-    const url = this.domainUrl + "/blogs";
+  getAllBlogs = (limit = null) => {
+    let url = this.domainUrl + "/blogs";
+    if (limit !== null) {
+      url += "?_limit=" + limit;
+    }
     Model.get(url, data => {
       this.setState({
         ...this.state,
@@ -45,8 +48,11 @@ class AppProvider extends Component {
     });
   };
 
-  setJobsData = () => {
-    const url = this.domainUrl + "/jobs";
+  getAllJobs = (limit = null) => {
+    let url = this.domainUrl + "/jobs";
+    if (limit !== null) {
+      url += "?_limit=" + limit;
+    }
     Model.get(url, data => {
       this.setState({
         ...this.state,
@@ -55,7 +61,7 @@ class AppProvider extends Component {
     });
   };
 
-  setCategoryData = () => {
+  getAllCategories = () => {
     const url = this.domainUrl + "/categories";
     Model.get(url, data => {
       this.setState({
@@ -65,7 +71,7 @@ class AppProvider extends Component {
     });
   };
 
-  getJobData = id => {
+  getSingleJob = id => {
     const url = this.domainUrl + "/jobs/" + id;
     Model.get(url, data => {
       this.setState({
@@ -75,7 +81,7 @@ class AppProvider extends Component {
     });
   };
 
-  getSingleBlogData = id => {
+  getSingleBlog = id => {
     const url = this.domainUrl + "/blogs/" + id;
     Model.get(url, data => {
       this.setState({
@@ -90,12 +96,12 @@ class AppProvider extends Component {
       <AppContext.Provider
         value={{
           ...this.state,
-          setfaqData: this.setfaqData,
-          setBlogData: this.setBlogData,
-          setJobsData: this.setJobsData,
-          getJobData: this.getJobData,
-          setCategoryData: this.setCategoryData,
-          getSingleBlogData: this.getSingleBlogData,
+          getAllFaqs: this.getAllFaqs,
+          getAllBlogs: this.getAllBlogs,
+          getAllJobs: this.getAllJobs,
+          getSingleJob: this.getSingleJob,
+          getAllCategories: this.getAllCategories,
+          getSingleBlog: this.getSingleBlog,
           SubscribeForm: this.SubscribeForm
         }}
       >

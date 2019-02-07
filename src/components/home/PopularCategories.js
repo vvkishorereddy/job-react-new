@@ -4,7 +4,7 @@ import withContext from "../../Context/ContextHOC";
 
 class PopularCategories extends Component {
   componentDidMount() {
-    this.props.context.setCategoryData();
+    this.props.context.getAllCategories();
   }
 
   render() {

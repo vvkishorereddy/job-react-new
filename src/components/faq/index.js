@@ -5,7 +5,7 @@ import withContext from "../../Context/ContextHOC";
 
 class Faq extends Component {
   componentDidMount() {
-    this.props.context.setfaqData();
+    this.props.context.getAllFaqs();
   }
 
   render() {

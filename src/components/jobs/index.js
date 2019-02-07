@@ -8,7 +8,7 @@ import { AppContext, AppConsumer } from "../../Context";
 
 export default class Jobs extends Component {
   componentDidMount() {
-    this.context.setJobsData();
+    this.context.getAllJobs();
   }
 
   render() {

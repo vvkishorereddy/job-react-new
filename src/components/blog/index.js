@@ -6,7 +6,7 @@ import withContext from "../../Context/ContextHOC";
 
 class Blog extends Component {
   componentDidMount() {
-    this.props.context.setBlogData();
+    this.props.context.getAllBlogs();
   }
 
   render() {

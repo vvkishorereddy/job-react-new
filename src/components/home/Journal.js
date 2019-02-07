@@ -4,7 +4,7 @@ import Row from "../blog/Row";
 
 class Journal extends Component {
   componentDidMount() {
-    this.props.context.setBlogData();
+    this.props.context.getAllBlogs(4);
   }
 
   render() {

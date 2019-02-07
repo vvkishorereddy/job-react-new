@@ -5,7 +5,7 @@ import JobRow from "./JobRow.js";
 
 class LatestJobs extends Component {
   componentDidMount() {
-    this.props.context.setJobsData();
+    this.props.context.getAllJobs(4);
   }
 
   render() {

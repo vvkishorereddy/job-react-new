@@ -5,7 +5,7 @@ import withContext from "../../Context/ContextHOC";
 
 class blogDetails extends Component {
   componentDidMount() {
-    this.props.context.getSingleBlogData(this.props.match.params.id);
+    this.props.context.getSingleBlog(this.props.match.params.id);
   }
 
   render() {
