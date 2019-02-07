@@ -13,12 +13,7 @@ export default class Footer extends Component {
           <div className="w-container">
             <div className="align-center">
               <Link to="/" className="w-inline-block">
-                <img
-                  sizes="173px"
-                  src="/assets/img/logo.png"
-                  width={173}
-                  alt="logo"
-                />
+                <img src="/assets/img/logo.png" alt="logo" />
               </Link>
               <div className="space" />
               <div>
