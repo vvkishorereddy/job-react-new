@@ -18,8 +18,11 @@ class AppProvider extends Component {
   domainUrl = "http://localhost:3000";
 
   SubscribeForm = (e, email) => {
+    const url = this.domainUrl + "/subscribers";
     e.preventDefault();
-    console.log(email);
+    Model.post(url, { email: email }, response => {
+      console.log(response);
+    });
   };
 
   setfaqData = () => {

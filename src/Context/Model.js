@@ -3,6 +3,15 @@ const Model = {
     return fetch(url)
       .then(response => response.json())
       .then(cb);
+  },
+  post: (url, data, cb) => {
+    return fetch(url, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    }).then(cb);
   }
 };
 
