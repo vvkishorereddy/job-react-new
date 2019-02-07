@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Model from "./Model";
 
 const AppContext = React.createContext();
 
@@ -14,83 +15,71 @@ class AppProvider extends Component {
     singleBlogData: {}
   };
 
-  setfaqData = () => {
-    fetch("/data/faqdata.json")
-      .then(response => response.json())
-      .then(data => {
-        this.setState({
-          ...this.state,
-          faq: data
-        });
-      });
-  };
-
-  setBlogData = () => {
-    fetch("/data/blogData.json")
-      .then(response => response.json())
-      .then(data => {
-        this.setState({
-          ...this.state,
-          posts: data
-        });
-      });
-  };
-
-  setJobsData = () => {
-    fetch("/data/jobsData.json")
-      .then(response => response.json())
-      .then(data => {
-        this.setState({
-          ...this.state,
-          jobs: data
-        });
-      });
-  };
-
-  getJobData = id => {
-    fetch("/data/jobsData.json")
-      .then(response => response.json())
-      .then(data => {
-        const filteredData = data.filter(post => {
-          return post.id === parseInt(id);
-        });
-        const singleResult = filteredData[0];
-        this.setState({
-          ...this.state,
-          singleJob: singleResult
-        });
-      });
-  };
-
-  setCategoryData = () => {
-    fetch("/data/category.json")
-      .then(response => response.json())
-      .then(data => {
-        this.setState({
-          ...this.state,
-          categories: data
-        });
-      });
-  };
-
-  getSingleBlogData = id => {
-    fetch("/data/blogData.json")
-      .then(response => response.json())
-      .then(data => {
-        const filteredData = data.filter(post => {
-          return post.id === parseInt(id);
-        });
-        const singleResult = filteredData[0];
-        this.setState({
-          ...this.state,
-          singleBlogData: singleResult
-        });
-      });
-  };
+  domainUrl = "http://localhost:3000";
 
   SubscribeForm = (e, email) => {
     e.preventDefault();
     console.log(email);
+  };
+
+  setfaqData = () => {
+    const url = this.domainUrl + "/faqs";
+    Model.get(url, data => {
+      this.setState({
+        ...this.state,
+        faq: data
+      });
+    });
+  };
+
+  setBlogData = () => {
+    const url = this.domainUrl + "/blogs";
+    Model.get(url, data => {
+      this.setState({
+        ...this.state,
+        posts: data
+      });
+    });
+  };
+
+  setJobsData = () => {
+    const url = this.domainUrl + "/jobs";
+    Model.get(url, data => {
+      this.setState({
+        ...this.state,
+        jobs: data
+      });
+    });
+  };
+
+  setCategoryData = () => {
+    const url = this.domainUrl + "/categories";
+    Model.get(url, data => {
+      this.setState({
+        ...this.state,
+        categories: data
+      });
+    });
+  };
+
+  getJobData = id => {
+    const url = this.domainUrl + "/jobs/" + id;
+    Model.get(url, data => {
+      this.setState({
+        ...this.state,
+        singleJob: data
+      });
+    });
+  };
+
+  getSingleBlogData = id => {
+    const url = this.domainUrl + "/blogs/" + id;
+    Model.get(url, data => {
+      this.setState({
+        ...this.state,
+        singleBlogData: data
+      });
+    });
   };
 
   render() {
