@@ -13,11 +13,12 @@ export default function Routes() {
     <Switch>
       <Route path="/" exact component={Home} />
       <Route path="/jobs" exact component={Jobs} />
-      <Route path="/faq" component={Faq} />
+      <Route path="/faq" exact component={Faq} />
       <Route path="/blog" exact component={Blog} />
-      <Route path="/blog/:id" component={blogDetails} />
+      <Route path="/blog/:id" exact component={blogDetails} />
       <Route path="/jobs/:id" component={jobDetails} />
-      <Route path="/categories/:category" component={Jobs} />
+      <Route path="/categories/:category" exact component={Jobs} />
+      <Route path="/job-types/:name" exact component={Jobs} />
     </Switch>
   );
 }

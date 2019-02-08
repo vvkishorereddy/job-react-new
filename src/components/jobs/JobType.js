@@ -12,7 +12,7 @@ export default class JobType extends Component {
               <div className="w-dyn-item">
                 <a
                   className="in-pages job-time"
-                  href="/job-tags/full-time"
+                  href="/job-types/Full-Time"
                   style={{ backgroundColor: "#5cb85c" }}
                 >
                   Full-Time
@@ -21,7 +21,7 @@ export default class JobType extends Component {
               <div className="w-dyn-item">
                 <a
                   className="in-pages job-time"
-                  href="/job-tags/part-time"
+                  href="/job-types/part-time"
                   style={{ backgroundColor: "#f0ad4e" }}
                 >
                   Part-Time
@@ -30,7 +30,7 @@ export default class JobType extends Component {
               <div className="w-dyn-item">
                 <a
                   className="in-pages job-time"
-                  href="/job-tags/freelance"
+                  href="/job-types/freelance"
                   style={{ backgroundColor: "#5bc0de" }}
                 >
                   Freelance
@@ -39,7 +39,7 @@ export default class JobType extends Component {
               <div className="w-dyn-item">
                 <a
                   className="in-pages job-time"
-                  href="/job-tags/intership"
+                  href="/job-types/intership"
                   style={{ backgroundColor: "#d9534f" }}
                 >
                   Intership
@@ -48,7 +48,7 @@ export default class JobType extends Component {
               <div className="w-dyn-item">
                 <a
                   className="in-pages job-time"
-                  href="/job-tags/remote"
+                  href="/job-types/remote"
                   style={{ backgroundColor: "#8435cc" }}
                 >
                   Remote

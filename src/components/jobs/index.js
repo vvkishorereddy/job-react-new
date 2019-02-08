@@ -9,9 +9,11 @@ import withContext from "../../Context/ContextHOC";
 class Jobs extends Component {
   componentDidMount() {
     this.props.context.clearState("jobs", () => {
-      this.props.context.getAllJobs();
+      this.props.context.getAllJobs(5, this.props.match);
     });
-    window.addEventListener("scroll", this.props.context.handleJobScroll);
+    window.addEventListener("scroll", () =>
+      this.props.context.handleJobScroll(5, this.props.match)
+    );
   }
 
   componentWillUnmount() {
@@ -19,7 +21,7 @@ class Jobs extends Component {
   }
 
   render() {
-    console.log(this.props);
+    //console.log(this.props);
     const { jobs } = this.props.context.jobsObject;
     return (
       <React.Fragment>

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import Model from "./Model";
 
 const AppContext = React.createContext();
@@ -103,9 +104,16 @@ class AppProvider extends Component {
     }
   };
 
-  getAllJobs = (limit = 5) => {
+  getAllJobs = (limit = 5, urlParams) => {
     const { page, jobs } = this.state.jobsObject;
     let url = `${this.domainUrl}/jobs?_page=${page}&_limit=${limit}`;
+    if (urlParams && urlParams.path === "/job-types/:name") {
+      url = `${this.domainUrl}/jobs?_page=${page}&_limit=${limit}&jobType=${
+        urlParams.params.name
+      }`;
+    }
+
+    console.log(url);
 
     Model.get(url, data => {
       let jobsObject = {
@@ -120,7 +128,7 @@ class AppProvider extends Component {
     });
   };
 
-  jobsLoadMore = () => {
+  jobsLoadMore = (limit, urlParams) => {
     this.setState(prevState => {
       return {
         jobsObject: {
@@ -129,17 +137,17 @@ class AppProvider extends Component {
           scrolling: true
         }
       };
-    }, this.getAllJobs);
+    }, this.getAllJobs(limit, urlParams));
   };
 
-  handleJobScroll = () => {
+  handleJobScroll = (limit, urlParams) => {
     const { scrolling } = this.state.jobsObject;
     if (scrolling) return;
     if (
       Math.ceil(window.innerHeight + window.scrollY) >=
       document.body.offsetHeight - 300
     ) {
-      this.jobsLoadMore();
+      this.jobsLoadMore(limit, urlParams);
     }
   };
 
@@ -196,4 +204,6 @@ class AppProvider extends Component {
   }
 }
 
-export { AppContext, AppProvider, AppConsumer };
+const AppProviderWithRouter = withRouter(AppProvider);
+
+export { AppContext, AppProviderWithRouter, AppConsumer };
