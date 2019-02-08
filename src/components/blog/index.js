@@ -6,11 +6,16 @@ import withContext from "../../Context/ContextHOC";
 
 class Blog extends Component {
   componentDidMount() {
-    this.props.context.getAllBlogs();
+    this.props.context.clearState("blog", () => {
+      this.props.context.getAllBlogs();
+    });
+    window.addEventListener("scroll", () => {
+      this.props.context.handleBlogScroll();
+    });
   }
 
   render() {
-    const { posts } = this.props.context;
+    const { posts } = this.props.context.postsObject;
     return (
       <React.Fragment>
         <Banner />

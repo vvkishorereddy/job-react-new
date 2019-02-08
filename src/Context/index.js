@@ -8,14 +8,42 @@ const AppConsumer = AppContext.Consumer;
 class AppProvider extends Component {
   state = {
     faq: [],
-    posts: [],
-    jobs: [],
     categories: [],
     singleJob: {},
-    singleBlogData: {}
+    singleBlogData: {},
+    jobsObject: {
+      jobs: [],
+      page: 1,
+      scrolling: false
+    },
+    postsObject: {
+      posts: [],
+      page: 1,
+      scrolling: false
+    }
   };
 
   domainUrl = "http://localhost:3001";
+
+  clearState = (type, cb) => {
+    const currentState = { ...this.state };
+
+    if (type === "jobs") {
+      currentState.jobsObject = {
+        jobs: [],
+        page: 1,
+        scrolling: false
+      };
+    }
+    if (type === "blog") {
+      currentState.postsObject = {
+        posts: [],
+        page: 1,
+        scrolling: false
+      };
+    }
+    this.setState(currentState, cb);
+  };
 
   SubscribeForm = (e, email) => {
     const url = this.domainUrl + "/subscribers";
@@ -35,30 +63,84 @@ class AppProvider extends Component {
     });
   };
 
-  getAllBlogs = (limit = null) => {
-    let url = this.domainUrl + "/blogs";
-    if (limit !== null) {
-      url += "?_limit=" + limit;
-    }
+  getAllBlogs = (limit = 4) => {
+    const { page, posts } = this.state.postsObject;
+    let url = `${this.domainUrl}/blogs?_page=${page}&_limit=${limit}`;
+
     Model.get(url, data => {
+      let postsObject = {
+        ...this.state.postsObject,
+        posts: [...posts, ...data],
+        scrolling: false
+      };
       this.setState({
         ...this.state,
-        posts: data
+        postsObject: postsObject
       });
     });
   };
 
-  getAllJobs = (limit = null) => {
-    let url = this.domainUrl + "/jobs";
-    if (limit !== null) {
-      url += "?_limit=" + limit;
+  blogLoadMore = () => {
+    this.setState(prevState => {
+      return {
+        postsObject: {
+          ...prevState.postsObject,
+          page: prevState.postsObject.page + 1,
+          scrolling: true
+        }
+      };
+    }, this.getAllBlogs);
+  };
+
+  handleBlogScroll = () => {
+    const { scrolling } = this.state.postsObject;
+    if (scrolling) return;
+    if (
+      Math.ceil(window.innerHeight + window.scrollY) >=
+      document.body.offsetHeight - 300
+    ) {
+      this.blogLoadMore();
     }
+  };
+
+  getAllJobs = (limit = 5) => {
+    const { page, jobs } = this.state.jobsObject;
+    let url = `${this.domainUrl}/jobs?_page=${page}&_limit=${limit}`;
+
     Model.get(url, data => {
+      let jobsObject = {
+        ...this.state.jobsObject,
+        jobs: [...jobs, ...data],
+        scrolling: false
+      };
       this.setState({
         ...this.state,
-        jobs: data
+        jobsObject: jobsObject
       });
     });
+  };
+
+  jobsLoadMore = () => {
+    this.setState(prevState => {
+      return {
+        jobsObject: {
+          ...prevState.jobsObject,
+          page: prevState.jobsObject.page + 1,
+          scrolling: true
+        }
+      };
+    }, this.getAllJobs);
+  };
+
+  handleJobScroll = () => {
+    const { scrolling } = this.state.jobsObject;
+    if (scrolling) return;
+    if (
+      Math.ceil(window.innerHeight + window.scrollY) >=
+      document.body.offsetHeight - 300
+    ) {
+      this.jobsLoadMore();
+    }
   };
 
   getAllCategories = () => {
@@ -102,7 +184,10 @@ class AppProvider extends Component {
           getSingleJob: this.getSingleJob,
           getAllCategories: this.getAllCategories,
           getSingleBlog: this.getSingleBlog,
-          SubscribeForm: this.SubscribeForm
+          SubscribeForm: this.SubscribeForm,
+          handleJobScroll: this.handleJobScroll,
+          handleBlogScroll: this.handleBlogScroll,
+          clearState: this.clearState
         }}
       >
         {this.props.children}

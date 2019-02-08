@@ -7,28 +7,20 @@ import Category from "./Category";
 import withContext from "../../Context/ContextHOC";
 
 class Jobs extends Component {
-  state = {
-    scrolling: false
-  };
-
   componentDidMount() {
-    window.addEventListener("scroll", () => {
-      this.setState({
-        scrolling: true
-      });
-
-      if (
-        Math.ceil(window.innerHeight + window.scrollY) >=
-        document.body.offsetHeight - 300
-      ) {
-        console.warn("bottom reached");
-      }
+    this.props.context.clearState("jobs", () => {
+      this.props.context.getAllJobs();
     });
-    this.props.context.getAllJobs(10);
+    window.addEventListener("scroll", this.props.context.handleJobScroll);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.props.context.handleJobScroll);
   }
 
   render() {
-    const { jobs } = this.props.context;
+    console.log(this.props);
+    const { jobs } = this.props.context.jobsObject;
     return (
       <React.Fragment>
         <Banner />

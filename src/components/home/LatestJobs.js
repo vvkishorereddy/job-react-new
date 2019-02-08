@@ -5,11 +5,13 @@ import JobRow from "./JobRow.js";
 
 class LatestJobs extends Component {
   componentDidMount() {
-    this.props.context.getAllJobs(4);
+    this.props.context.clearState("jobs", () => {
+      this.props.context.getAllJobs(4);
+    });
   }
 
   render() {
-    const { jobs } = this.props.context;
+    const { jobs } = this.props.context.jobsObject;
 
     return (
       <div className="section" id="recent">

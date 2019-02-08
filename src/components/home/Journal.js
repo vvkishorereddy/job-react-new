@@ -4,11 +4,13 @@ import Row from "../blog/Row";
 
 class Journal extends Component {
   componentDidMount() {
-    this.props.context.getAllBlogs(4);
+    this.props.context.clearState("blog", () => {
+      this.props.context.getAllBlogs(4);
+    });
   }
 
   render() {
-    const { posts } = this.props.context;
+    const { posts } = this.props.context.postsObject;
 
     return (
       <div className="light-gray section">

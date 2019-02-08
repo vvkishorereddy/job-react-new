@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PopularCategories from "./PopularCategories";
 import Content from "./Content";
 import LatestJobs from "./LatestJobs";
-import Journal from "./Journal";
 import Banner from "./Banner";
 
 export default class Home extends Component {
@@ -13,7 +12,6 @@ export default class Home extends Component {
         <PopularCategories />
         <Content />
         <LatestJobs />
-        <Journal />
       </React.Fragment>
     );
   }
