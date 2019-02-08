@@ -15,7 +15,7 @@ class AppProvider extends Component {
     singleBlogData: {}
   };
 
-  domainUrl = "http://localhost:3000";
+  domainUrl = "http://localhost:3001";
 
   SubscribeForm = (e, email) => {
     const url = this.domainUrl + "/subscribers";
