@@ -4,9 +4,9 @@ import Banner from "./Banner";
 import Row from "./Row";
 import JobType from "./JobType";
 import Category from "./Category";
-import { AppContext, AppConsumer } from "../../Context";
+import withContext from "../../Context/ContextHOC";
 
-export default class Jobs extends Component {
+class Jobs extends Component {
   state = {
     scrolling: false
   };
@@ -24,10 +24,11 @@ export default class Jobs extends Component {
         console.warn("bottom reached");
       }
     });
-    this.context.getAllJobs(10);
+    this.props.context.getAllJobs(10);
   }
 
   render() {
+    const { jobs } = this.props.context;
     return (
       <React.Fragment>
         <Banner />
@@ -37,13 +38,9 @@ export default class Jobs extends Component {
               <div className="w-col w-col-9 w-col-stack">
                 <div className="w-dyn-list">
                   <div className="w-dyn-items">
-                    <AppConsumer>
-                      {({ jobs }) => {
-                        return jobs.map(post => {
-                          return <Row key={post.id} post={post} />;
-                        });
-                      }}
-                    </AppConsumer>
+                    {jobs.map(post => {
+                      return <Row key={post.id} post={post} />;
+                    })}
                   </div>
                 </div>
               </div>
@@ -62,4 +59,4 @@ export default class Jobs extends Component {
   }
 }
 
-Jobs.contextType = AppContext;
+export default withContext(Jobs);
